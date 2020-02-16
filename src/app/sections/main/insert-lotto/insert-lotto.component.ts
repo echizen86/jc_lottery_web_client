@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./insert-lotto.component.css']
 })
 export class InsertLottoComponent implements OnInit {
-  panelOpenState;
+  panelOpenState: boolean;
 
   constructor() {}
 
