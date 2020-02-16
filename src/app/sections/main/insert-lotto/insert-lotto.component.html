@@ -1,43 +1,87 @@
 <mat-accordion>
- <mat-expansion-panel>
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Insert Lotto
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div>
-      <mat-form-field>
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-     <!-- Inputs -->
-    <div>
-      <span>
-          <input class="number">
-      </span>
-      <span>
-          <input class="number">
-      </span>
-      <span>
-          <input class="number">
+    <form [formGroup]="insertLottoForm" novalidate>
+      <div>
+        <span>
+          <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </span>
         <span>
-          <input class="number">
+          <select class="select-lotto-type" formControlName="selectedLottoType">
+            <option></option>
+            <option *ngFor="let lotto of lottoTypeList" [ngValue]="lotto" [innerText]="lotto.description"></option>
+          </select>
+        </span>
+      </div>
+      <!-- Inputs -->
+      <div>
+        <span>
+          <input class="number" formControlName="numberOne" maxlength=2>
         </span>
         <span>
-          <input class="number">
+          <input class="number" formControlName="numberTwo" maxlength=2>
         </span>
         <span>
-          <input class="number">
-      </span>
-    </div>
+          <input class="number" formControlName="numberThree" maxlength=2>
+        </span>
+        <span>
+          <input class="number" formControlName="numberFour" maxlength=2>
+        </span>
+        <span>
+          <input class="number" formControlName="numberFive" maxlength=2>
+        </span>
+        <span>
+          <input class="number" formControlName="specialBall" maxlength=2>
+        </span>
+      </div>
 
-    <!-- Balls -->
-    <div>
-      Balls with numbers
-    </div>
+      <!-- Balls -->
+      <div class="line-balls">
+        <span class="dot">
+          <div class="dot-number">
+            <span [innerText]="getNumberOne()"></span>
+          </div>
+        </span>
+        <span class="dot">
+          <div class="dot-number">
+            <span [innerText]="getNumberTwo()"></span>
+          </div>
+        </span>
+        <span class="dot">
+          <div class="dot-number">
+            <span [innerText]="getNumberThree()"></span>
+          </div>
+        </span>
+        <span class="dot">
+          <div class="dot-number">
+            <span [innerText]="getNumberFour()"></span>
+          </div>
+        </span>
+        <span class="dot">
+          <div class="dot-number">
+            <span [innerText]="getNumberFive()"></span>
+          </div>
+        </span>
+        <span class="dot dot-special-ball">
+          <div class="dot-number">
+            <span [innerText]="getSpecialBall()"></span>
+          </div>
+        </span>
+      </div>
+      <div>
+        <button (click)="insertLotto()">
+          Insert
+        </button>
+      </div>
+    </form>
   </mat-expansion-panel>
 </mat-accordion>

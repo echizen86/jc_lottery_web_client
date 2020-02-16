@@ -8,19 +8,22 @@ import { MainComponent } from './sections/main/main.component';
 import { InsertLottoComponent } from './sections/main/insert-lotto/insert-lotto.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionsModule } from './sections/sections.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     InsertLottoComponent,
-    MainComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SectionsModule
+    SectionsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PortalModule } from '@angular/cdk/portal';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
