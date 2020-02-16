@@ -3,16 +3,26 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { MainComponent } from './sections/main/main.component';
+import { InsertLottoComponent } from './sections/main/insert-lotto/insert-lotto.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SectionsModule } from './sections/sections.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    InsertLottoComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SectionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
