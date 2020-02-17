@@ -311,3 +311,11 @@ svg#clouds {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.form-control.ng-untouched,
+.form-control.ng-valid {
+    border-color: #CCC !important;
+}
+.form-control.is-invalid {
+  border-color: #da5757 !important;
+}

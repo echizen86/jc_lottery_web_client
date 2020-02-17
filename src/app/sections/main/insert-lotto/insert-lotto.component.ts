@@ -16,6 +16,7 @@ export class InsertLottoComponent implements OnInit {
   panelOpenState: boolean;
   lottoTypeList: LottoType[];
   lotto: Lotto;
+  submitted: boolean;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -28,6 +29,7 @@ export class InsertLottoComponent implements OnInit {
   }
 
   initializingData() {
+    this.submitted = false;
     this.panelOpenState = false;
     this.lottoTypeList = [];
     this.lotto = new Lotto();
@@ -47,7 +49,7 @@ export class InsertLottoComponent implements OnInit {
 
   buildInsertLottoForm() {
     this.insertLottoForm = this.formBuilder.group({
-      numberOne: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+      numberOne: new FormControl('', [Validators.required, Validators.maxLength(2), Validators.pattern('^[0-9]*$')]),
       numberTwo: new FormControl('', [Validators.required, Validators.maxLength(2)]),
       numberThree: new FormControl('', [Validators.required, Validators.maxLength(2)]),
       numberFour: new FormControl('', [Validators.required, Validators.maxLength(2)]),
@@ -68,31 +70,58 @@ export class InsertLottoComponent implements OnInit {
     });
 
     this.insertLottoForm.get('numberOne').valueChanges.subscribe(value => {
-      this.lotto.numberOne = value;
+      this.lotto.numberOne = null;
+      if (this.checkNumber(value)) {
+        this.lotto.numberOne = value;
+      }
     });
 
     this.insertLottoForm.get('numberTwo').valueChanges.subscribe(value => {
-      this.lotto.numberTwo = value;
+      this.lotto.numberTwo = null;
+      if (this.checkNumber(value)) {
+        this.lotto.numberTwo = value;
+      }
     });
 
     this.insertLottoForm.get('numberThree').valueChanges.subscribe(value => {
-      this.lotto.numberThree = value;
+      this.lotto.numberThree = null;
+      if (this.checkNumber(value)) {
+        this.lotto.numberThree = value;
+      }
     });
 
     this.insertLottoForm.get('numberFour').valueChanges.subscribe(value => {
-      this.lotto.numberFour = value;
+      this.lotto.numberFour = null;
+      if (this.checkNumber(value)) {
+        this.lotto.numberFour = value;
+      }
     });
 
     this.insertLottoForm.get('numberFive').valueChanges.subscribe(value => {
-      this.lotto.numberFive = value;
+      this.lotto.numberFive = null;
+      if (this.checkNumber(value)) {
+        this.lotto.numberFive = value;
+      }
     });
 
     this.insertLottoForm.get('specialBall').valueChanges.subscribe(value => {
-      this.lotto.specialBall = value;
+      this.lotto.specialBall = null;
+      if (this.checkSpecialBall(value)) {
+        this.lotto.specialBall = value;
+      }
     });
   }
 
+  checkNumber(numberLotto: number) {
+    return numberLotto > 0 && numberLotto < 70;
+  }
+
+  checkSpecialBall(specialBall: number) {
+    return specialBall > 0 && specialBall < 27;
+  }
+
   insertLotto() {
+    this.submitted = true;
     alert(JSON.stringify(this.lotto));
   }
 
