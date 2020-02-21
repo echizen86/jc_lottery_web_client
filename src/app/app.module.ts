@@ -9,18 +9,22 @@ import { InsertLottoComponent } from './sections/main/insert-lotto/insert-lotto.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionsModule } from './sections/sections.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ContainerComponent } from './sections/main/container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     InsertLottoComponent,
-    MainComponent
+    MainComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     SectionsModule,
     FormsModule,
     ReactiveFormsModule,

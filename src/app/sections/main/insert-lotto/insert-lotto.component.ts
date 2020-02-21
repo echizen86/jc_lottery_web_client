@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { LottoType } from '../data-type/lotto-type';
 import { Lotto } from '../data-type/lotto';
 import { isNullOrUndefinedOrEmpty } from 'src/app/shared/services/utils.service';
+import { MainService } from '../main.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class InsertLottoComponent implements OnInit {
   lotto: Lotto;
   submitted: boolean;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private mainService: MainService) { }
 
   ngOnInit(): void {
     this.initializingData();
@@ -36,15 +37,9 @@ export class InsertLottoComponent implements OnInit {
   }
 
   initializingLottoType() {
-    const powerBall = new LottoType();
-    powerBall.lottoType = 'P';
-    powerBall.description = 'Power Ball';
-    this.lottoTypeList[0] = powerBall;
-
-    const megaMillions = new LottoType();
-    megaMillions.lottoType = 'M';
-    megaMillions.description = 'Mega Millions';
-    this.lottoTypeList[1] = megaMillions;
+    this.mainService.getLottoTypes().subscribe(result => {
+      this.lottoTypeList = result;
+    });
   }
 
   buildInsertLottoForm() {
@@ -122,7 +117,12 @@ export class InsertLottoComponent implements OnInit {
 
   insertLotto() {
     this.submitted = true;
-    alert(JSON.stringify(this.lotto));
+    if  (this.insertLottoForm.valid) {
+      this.mainService.insertLottoNumber(this.lotto).subscribe(result => {
+        console.log('lotto inserted', result);
+        // handle an event to update the lotto numbers list in parent
+      });
+    }
   }
 
   getNumberOne() {

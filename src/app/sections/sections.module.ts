@@ -12,6 +12,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainService } from './main/main.service';
 
 @NgModule({
   declarations: [],
