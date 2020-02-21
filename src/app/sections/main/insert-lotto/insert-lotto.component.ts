@@ -119,10 +119,22 @@ export class InsertLottoComponent implements OnInit {
     this.submitted = true;
     if  (this.insertLottoForm.valid) {
       this.mainService.insertLottoNumber(this.lotto).subscribe(result => {
-        console.log('lotto inserted', result);
+        this.cleanForm();
+        this.submitted = false;
         // handle an event to update the lotto numbers list in parent
       });
     }
+  }
+
+  cleanForm() {
+    this.insertLottoForm.get('date').setValue('');
+    this.insertLottoForm.get('selectedLottoType').setValue('');
+    this.insertLottoForm.get('numberOne').setValue('');
+    this.insertLottoForm.get('numberTwo').setValue('');
+    this.insertLottoForm.get('numberThree').setValue('');
+    this.insertLottoForm.get('numberFour').setValue('');
+    this.insertLottoForm.get('numberFive').setValue('');
+    this.insertLottoForm.get('specialBall').setValue('');
   }
 
   getNumberOne() {

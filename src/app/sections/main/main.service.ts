@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Lotto } from './data-type/lotto';
 import { Observable } from 'rxjs';
 import { LottoType } from './data-type/lotto-type';
@@ -18,5 +18,10 @@ export class MainService {
 
   getLottoTypes(): Observable<LottoType[]> {
     return this.httpClient.get<LottoType[]>(this.REST_API_SERVER + '/lotto-type/lotto-types');
+  }
+
+  getLottoNumbers(lottoType: string): Observable<Lotto[]> {
+    const params = new HttpParams().set('lottoType', lottoType);
+    return this.httpClient.get<Lotto[]>(this.REST_API_SERVER + '/lotto/numbers-lotto-type', {params});
   }
 }
