@@ -1,3 +1,6 @@
+<div>
+  <app-lotto-history></app-lotto-history>
+</div>
 <p>container works!</p>
 <div>
   <span>{{"TOP FIVE: "}}</span>
@@ -9,7 +12,7 @@
 </div>
 <div *ngFor="let lotto of powerBallNumbers">
   <span>{{lotto.lottoType.description + ": "}}</span>
-  <span>{{lotto.date + " - "}}</span>
+  <span>{{lotto.date | DatePipe:'MM/DD/YYYY' + " ::: "}}</span>
   <span>{{lotto.numberOne + " - "}}</span>
   <span>{{lotto.numberTwo + " - "}}</span>
   <span>{{lotto.numberThree + " - "}}</span>

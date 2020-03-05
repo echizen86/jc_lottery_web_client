@@ -11,14 +11,12 @@ import { SectionsModule } from './sections/sections.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContainerComponent } from './sections/main/container/container.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    InsertLottoComponent,
-    MainComponent,
-    ContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +24,7 @@ import { ContainerComponent } from './sections/main/container/container.componen
     BrowserAnimationsModule,
     HttpClientModule,
     SectionsModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

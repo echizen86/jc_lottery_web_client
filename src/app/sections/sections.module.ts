@@ -13,11 +13,24 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainService } from './main/main.service';
+import { InsertLottoComponent } from './main/insert-lotto/insert-lotto.component';
+import { MainComponent } from './main/main.component';
+import { ContainerComponent } from './main/container/container.component';
+import { SharedModule } from '../shared/shared.module';
+import { LottoHistoryComponent } from './main/lotto-history/lotto-history.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InsertLottoComponent,
+    MainComponent,
+    ContainerComponent,
+    LottoHistoryComponent
+  ],
   imports: [
     CommonModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatDatepickerModule,
@@ -33,7 +46,7 @@ import { MainService } from './main/main.service';
     MatNativeDateModule,
     MatRippleModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
   ],
   exports: [
     MatExpansionModule,
@@ -51,7 +64,11 @@ import { MainService } from './main/main.service';
     MatNativeDateModule,
     MatRippleModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    InsertLottoComponent,
+    MainComponent,
+    ContainerComponent,
+    LottoHistoryComponent
   ],
   providers: [MatDatepickerModule],
   bootstrap: []
