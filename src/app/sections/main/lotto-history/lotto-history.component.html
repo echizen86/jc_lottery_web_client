@@ -36,6 +36,18 @@
             Search
           </button>
         </div>
+        
+       <div *ngFor="let lotto of powerBallNumbers">
+        <span>{{lotto.lottoType.description + ": "}}</span>
+        <span>{{lotto.date | DatePipe:'MM/DD/YYYY' + " ::: "}}</span>
+        <span>{{lotto.numberOne + " - "}}</span>
+        <span>{{lotto.numberTwo + " - "}}</span>
+        <span>{{lotto.numberThree + " - "}}</span>
+        <span>{{lotto.numberFour + " - "}}</span>
+        <span>{{lotto.numberFive + " - "}}</span>
+        <span>{{lotto.specialBall}}</span>
+      </div>
+
       </div>
       <!-- Lotto History -->
     </form>

@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LottoType } from '../data-type/lotto-type';
+import { ContainerComponent } from '../container/container.component'
+import { Lotto } from '../data-type/lotto';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-lotto-history',
@@ -12,11 +15,41 @@ export class LottoHistoryComponent implements OnInit {
   @Input() lottoTypeList: LottoType[];
   lottoHistoryForm: FormGroup;
   submitted: boolean;
+  powerBallNumbers: Lotto[]; // all lotto
+  numberList: number[];
+  specialBallList: number[];
 
-  constructor() { }
+  constructor(private mainService: MainService) { }
 
   ngOnInit(): void {
-    this.submitted = false;
+    this.initializeData();
+    this.initializeLottoNumbers();
+  }
+
+  initializeData() {
+    this.numberList = [];
+    this.powerBallNumbers = [];
+    this.powerBallNumbers = [];
+  }
+
+  initializeLottoNumbers() {
+    this.mainService.getLottoNumbers('P').subscribe(response => {
+      this.powerBallNumbers = response;
+      this.convertLottoToNumberList(this.powerBallNumbers);
+      // this.numberList = this.countSortNumbers();
+    });
+  }
+
+  convertLottoToNumberList(lotto: Lotto[]) {
+    if (lotto[0].lottoType.lottoType === 'P') {
+      lotto.forEach(result => {
+        this.numberList.push(result.numberOne);
+        this.numberList.push(result.numberTwo);
+        this.numberList.push(result.numberThree);
+        this.numberList.push(result.numberFour);
+        this.numberList.push(result.numberFive);
+      });
+    }
   }
 
   search() {

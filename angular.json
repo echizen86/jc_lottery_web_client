@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "jc-lottery-web-client"
+  "defaultProject": "jc-lottery-web-client",
+  "cli": {
+    "analytics": false
+  }
 }
