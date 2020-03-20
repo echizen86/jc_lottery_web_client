@@ -61,13 +61,19 @@ export class InsertLottoComponent implements OnInit {
     });
 
     this.insertLottoForm.get('selectedLottoType').valueChanges.subscribe(value => {
+      console.log(value);
       this.lotto.lottoType = value;
+      if (this.disabledInputNumber()) {
+        this.cleanInputNumbers();
+      }
     });
 
     this.insertLottoForm.get('numberOne').valueChanges.subscribe(value => {
       this.lotto.numberOne = null;
       if (this.checkNumber(value)) {
         this.lotto.numberOne = value;
+      } else {
+        this.insertLottoForm.get('numberOne').setErrors({invalid: true});
       }
     });
 
@@ -75,6 +81,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberTwo = null;
       if (this.checkNumber(value)) {
         this.lotto.numberTwo = value;
+      }else {
+        this.insertLottoForm.get('numberTwo').setErrors({invalid: true});
       }
     });
 
@@ -82,6 +90,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberThree = null;
       if (this.checkNumber(value)) {
         this.lotto.numberThree = value;
+      }else {
+        this.insertLottoForm.get('numberThree').setErrors({invalid: true});
       }
     });
 
@@ -89,6 +99,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberFour = null;
       if (this.checkNumber(value)) {
         this.lotto.numberFour = value;
+      }else {
+        this.insertLottoForm.get('numberFour').setErrors({invalid: true});
       }
     });
 
@@ -96,6 +108,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberFive = null;
       if (this.checkNumber(value)) {
         this.lotto.numberFive = value;
+      }else {
+        this.insertLottoForm.get('numberFive').setErrors({invalid: true});
       }
     });
 
@@ -108,11 +122,25 @@ export class InsertLottoComponent implements OnInit {
   }
 
   checkNumber(numberLotto: number) {
-    return numberLotto > 0 && numberLotto < 70;
+    if (this.lotto.lottoType.lottoType === 'P') {
+      return numberLotto > 0 && numberLotto < 70;
+    }
+    if (this.lotto.lottoType.lottoType === 'M') {
+      return numberLotto > 0 && numberLotto < 71;
+    }
   }
 
   checkSpecialBall(specialBall: number) {
-    return specialBall > 0 && specialBall < 27;
+    if (this.lotto.lottoType.lottoType === 'P') {
+      return specialBall > 0 && specialBall < 27;
+    }
+    if (this.lotto.lottoType.lottoType === 'M') {
+      return specialBall > 0 && specialBall < 26;
+    }
+  }
+
+  disabledInputNumber() {
+    return isNullOrUndefinedOrEmpty(this.lotto.lottoType);
   }
 
   insertLotto() {
@@ -124,6 +152,15 @@ export class InsertLottoComponent implements OnInit {
         // handle an event to update the lotto numbers list in parent
       });
     }
+  }
+
+  cleanInputNumbers() {
+    this.insertLottoForm.get('numberOne').setValue('');
+    this.insertLottoForm.get('numberTwo').setValue('');
+    this.insertLottoForm.get('numberThree').setValue('');
+    this.insertLottoForm.get('numberFour').setValue('');
+    this.insertLottoForm.get('numberFive').setValue('');
+    this.insertLottoForm.get('specialBall').setValue('');
   }
 
   cleanForm() {

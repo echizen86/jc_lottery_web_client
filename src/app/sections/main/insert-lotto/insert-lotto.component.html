@@ -25,33 +25,50 @@
                 </span>
             </div>
             <!-- Inputs -->
-            <div>
-                <span>
-                    <input class="number form-control" formControlName="numberOne" maxlength=2
-                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberOne').errors}">
-                </span>
-                <span>
-                    <input class="number form-control" formControlName="numberTwo" maxlength=2
-                     [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberTwo').errors}">
-                </span>
-                <span>
-                    <input class="number form-control" formControlName="numberThree" maxlength=2
-                     [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberThree').errors}">
-                </span>
-                <span>
-                    <input class="number form-control" formControlName="numberFour" maxlength=2
-                     [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFour').errors}">
-                </span>
-                <span>
-                    <input class="number form-control" formControlName="numberFive" maxlength=2
-                     [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFive').errors}">
-                </span>
-                <span>
-                    <input class="number form-control" formControlName="specialBall" maxlength=2
-                     [ngClass]="{'is-invalid': submitted && insertLottoForm.get('specialBall').errors}">
-                </span>
-            </div>
+            <div id="contractTaxBox" class="col-md-6 grp-col-3">
+                <div>
+                    <span>                    
+                        <input type="number" class="number form-control" formControlName="numberOne" maxlength=2
+                            [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberOne').errors}"
+                            [readonly]="disabledInputNumber()">
+                        
+                    </span>
+                    <span>
+                        <input type="number" class="number form-control" formControlName="numberTwo" maxlength=2
+                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberTwo').errors}"
+                        [readonly]="disabledInputNumber()">
+                    </span>
+                    <span>
+                        <input type="number" class="number form-control" formControlName="numberThree" maxlength=2
+                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberThree').errors}"
+                        [readonly]="disabledInputNumber()">
+                    </span>
+                    <span>
+                        <input type="number" class="number form-control" formControlName="numberFour" maxlength=2
+                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFour').errors}"
+                        [readonly]="disabledInputNumber()">
+                    </span>
+                    <span>
+                        <input type="number" class="number form-control" formControlName="numberFive" maxlength=2
+                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFive').errors}"
+                        [readonly]="disabledInputNumber()">
+                    </span>
+                    <span>
+                        <input type="number" class="number form-control" formControlName="specialBall" maxlength=2
+                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('specialBall').errors}">
+                    </span>
+                </div>
 
+                <!-- errors -->
+                <div>
+                    <span *ngIf="insertLottoForm.get('numberOne').errors?.invalid">I/N</span>
+                    <span *ngIf="insertLottoForm.get('numberTwo').errors?.invalid">I/N</span>
+                    <span *ngIf="insertLottoForm.get('numberThree').errors?.invalid">I/N</span>
+                    <span *ngIf="insertLottoForm.get('numberFour').errors?.invalid">I/N</span>
+                    <span *ngIf="insertLottoForm.get('numberFive').errors?.invalid">I/N</span>
+                
+                </div>
+            </div>
             <!-- Balls -->
             <div class="line-balls">
                 <span class="dot">

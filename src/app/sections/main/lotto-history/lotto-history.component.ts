@@ -18,6 +18,8 @@ export class LottoHistoryComponent implements OnInit {
   powerBallNumbers: Lotto[]; // all lotto
   numberList: number[];
   specialBallList: number[];
+  picker='';
+  
 
   constructor(private mainService: MainService) { }
 
@@ -52,7 +54,8 @@ export class LottoHistoryComponent implements OnInit {
     }
   }
 
-  search() {
+  search() { 
+    console.log(this.picker);
     return false;
   }
 
