@@ -1,25 +1,26 @@
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Lotto History
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <form [formGroup]="lottoHistoryForm" novalidate>
-      <div>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Lotto History
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <form [formGroup]="lottoHistoryForm" novalidate>
+    <div>
+      <div class="box">
         <span>
           <mat-form-field>
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dateFrom">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <input matInput [matDatepicker]="from" formControlName="dateFrom">
+            <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+            <mat-datepicker #from></mat-datepicker>
           </mat-form-field>
         </span>
         <span>
           <mat-form-field>
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dateTo">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <input matInput [matDatepicker]="to" formControlName="dateTo">
+            <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+            <mat-datepicker #to></mat-datepicker>
           </mat-form-field>
         </span>
         <span>
@@ -30,13 +31,14 @@
             </option>
           </select>
         </span>
-        <div class="button">
-          <button (click)="search()">
-            Search
-          </button>
-        </div>
+      </div>
+      <div class="button">
+        <button (click)="search()">
+          Search
+        </button>
+      </div>
 
-       <div *ngFor="let lotto of powerBallNumbers">
+      <div *ngFor="let lotto of powerBallNumbers">
         <span>{{lotto.lottoType.description + ": "}}</span>
         <span>{{lotto.date | DatePipe:'MM/DD/YYYY' + " ::: "}}</span>
         <span>{{lotto.numberOne + " - "}}</span>
@@ -47,7 +49,7 @@
         <span>{{lotto.specialBall}}</span>
       </div>
 
-      </div>
-      <!-- Lotto History -->
-    </form>
-  </mat-expansion-panel>
+    </div>
+    <!-- Lotto History -->
+  </form>
+</mat-expansion-panel>

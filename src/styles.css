@@ -325,3 +325,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 5px !important;
 }
 
+.box {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.container {
+  width: 750px !important;
+}
+
+div .select-lotto-type {
+  align-self: center;
+}
+
+.select-lotto-type {
+  width: 150px;
+  height: 25px;
+}

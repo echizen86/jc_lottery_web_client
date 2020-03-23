@@ -4,15 +4,6 @@
   margin-right: 25px;
 }
 
-div .select-lotto-type {
-  align-self: center;
-}
-
-.select-lotto-type {
-  width: 150px;
-  height: 25px;
-}
-
 .line-balls {
   margin-top: 25px;
 }
@@ -41,10 +32,4 @@ div .select-lotto-type {
 
 .button {
   flex: auto;
-}
-
-.box {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px;
 }

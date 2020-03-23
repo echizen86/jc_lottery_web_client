@@ -28,7 +28,7 @@
         </div>
         <!-- Inputs -->
         <div id="contractTaxBox" class="col-md-6 grp-col-3">
-          <div>
+          <div class="box">
             <span>
               <input class="number form-control" formControlName="numberOne" maxlength=2
                 [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberOne').errors}"
@@ -62,7 +62,7 @@
           </div>
         </div>
         <!-- Balls -->
-        <div class="line-balls">
+        <div class="box line-balls">
           <span class="dot">
             <div class="dot-number">
               <span [innerText]="getNumberOne()"></span>

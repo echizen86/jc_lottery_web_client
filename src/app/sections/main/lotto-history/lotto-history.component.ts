@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LottoType } from '../data-type/lotto-type';
 import { Lotto } from '../data-type/lotto';
 import { MainService } from '../main.service';
@@ -12,18 +12,19 @@ import { MainService } from '../main.service';
 export class LottoHistoryComponent implements OnInit {
 
   @Input() lottoTypeList: LottoType[];
+
   lottoHistoryForm: FormGroup;
   submitted: boolean;
   powerBallNumbers: Lotto[]; // all lotto
   numberList: number[];
   specialBallList: number[];
 
-
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: MainService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initializeData();
     this.initializeLottoNumbers();
+    this.buildLottoHistoryForm();
   }
 
   initializeData() {
@@ -36,7 +37,14 @@ export class LottoHistoryComponent implements OnInit {
     this.mainService.getLottoNumbers('P').subscribe(response => {
       this.powerBallNumbers = response;
       this.convertLottoToNumberList(this.powerBallNumbers);
-      // this.numberList = this.countSortNumbers();
+    });
+  }
+
+  buildLottoHistoryForm() {
+    this.lottoHistoryForm = this.formBuilder.group({
+      dateFrom: new FormControl('', [Validators.required]),
+      dateTo: new FormControl('', [Validators.required]),
+      selectedLottoType: new FormControl('', [Validators.required])
     });
   }
 
