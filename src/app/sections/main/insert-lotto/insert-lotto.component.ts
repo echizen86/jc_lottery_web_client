@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LottoType } from '../data-type/lotto-type';
 import { Lotto } from '../data-type/lotto';
@@ -14,9 +14,10 @@ import { isNullOrUndefined } from 'util';
 })
 export class InsertLottoComponent implements OnInit {
 
+  @Input() lottoTypeList: LottoType[];
+
   insertLottoForm: FormGroup;
   panelOpenState: boolean;
-  lottoTypeList: LottoType[];
   lotto: Lotto;
   submitted: boolean;
 
@@ -24,7 +25,6 @@ export class InsertLottoComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializingData();
-    this.initializingLottoType();
 
     this.buildInsertLottoForm();
     this.subscribeToFormChanges();
@@ -33,14 +33,7 @@ export class InsertLottoComponent implements OnInit {
   initializingData() {
     this.submitted = false;
     this.panelOpenState = false;
-    this.lottoTypeList = [];
     this.lotto = new Lotto();
-  }
-
-  initializingLottoType() {
-    this.mainService.getLottoTypes().subscribe(result => {
-      this.lottoTypeList = result;
-    });
   }
 
   buildInsertLottoForm() {

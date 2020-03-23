@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../main.service';
-import { Lotto } from '../data-type/lotto';
+import { LottoType } from '../data-type/lotto-type';
 
 @Component({
   selector: 'app-container',
@@ -9,58 +9,22 @@ import { Lotto } from '../data-type/lotto';
 })
 export class ContainerComponent implements OnInit {
 
-  constructor(private mainService: MainService) { }
+  lottoTypeList: LottoType[];
 
-  powerBallNumbers: Lotto[]; // all lotto
-  numberList: number[];
-  specialBallList: number[];
+  constructor(private mainService: MainService) { }
 
   ngOnInit(): void {
     this.initializeData();
-    this.initializeLottoNumbers();
+    this.initializingLottoType();
   }
 
   initializeData() {
-    this.numberList = [];
-    this.powerBallNumbers = [];
-    this.powerBallNumbers = [];
+    this.lottoTypeList = [];
   }
 
-  initializeLottoNumbers() {
-    this.mainService.getLottoNumbers('P').subscribe(response => {
-      this.powerBallNumbers = response;
-      this.convertLottoToNumberList(this.powerBallNumbers);
-      this.numberList = this.countSortNumbers();
+  initializingLottoType() {
+    this.mainService.getLottoTypes().subscribe(result => {
+      this.lottoTypeList = result;
     });
   }
-
-  convertLottoToNumberList(lotto: Lotto[]) {
-    if (lotto[0].lottoType.lottoType === 'P') {
-      lotto.forEach(result => {
-        this.numberList.push(result.numberOne);
-        this.numberList.push(result.numberTwo);
-        this.numberList.push(result.numberThree);
-        this.numberList.push(result.numberFour);
-        this.numberList.push(result.numberFive);
-      });
-    }
-  }
-
-  countSortNumbers() {
-    const indexNumbers = new Array(70);
-    indexNumbers.fill(0);
-    for (let i = 0; i < indexNumbers.length; i++) {
-      for (let j = 0; j < this.numberList.length; j++) {
-        if (i === this.numberList[j]) {
-          indexNumbers[i] = indexNumbers[i] + 1;
-        }
-      }
-    }
-    return indexNumbers;
-  }
-
-  getSortedNumbers() {
-    return this.numberList.sort();
-  }
-
 }
