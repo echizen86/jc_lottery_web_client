@@ -1,4 +1,3 @@
-<mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -36,7 +35,7 @@
             Search
           </button>
         </div>
-        
+
        <div *ngFor="let lotto of powerBallNumbers">
         <span>{{lotto.lottoType.description + ": "}}</span>
         <span>{{lotto.date | DatePipe:'MM/DD/YYYY' + " ::: "}}</span>
@@ -52,4 +51,3 @@
       <!-- Lotto History -->
     </form>
   </mat-expansion-panel>
-</mat-accordion>

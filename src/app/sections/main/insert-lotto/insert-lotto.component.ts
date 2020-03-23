@@ -4,6 +4,7 @@ import { LottoType } from '../data-type/lotto-type';
 import { Lotto } from '../data-type/lotto';
 import { isNullOrUndefinedOrEmpty } from 'src/app/shared/services/utils.service';
 import { MainService } from '../main.service';
+import { isNullOrUndefined } from 'util';
 
 
 @Component({
@@ -73,7 +74,7 @@ export class InsertLottoComponent implements OnInit {
       if (this.checkNumber(value)) {
         this.lotto.numberOne = value;
       } else {
-        this.insertLottoForm.get('numberOne').setErrors({invalid: true});
+        this.insertLottoForm.get('numberOne').setErrors({ invalid: true });
       }
     });
 
@@ -81,8 +82,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberTwo = null;
       if (this.checkNumber(value)) {
         this.lotto.numberTwo = value;
-      }else {
-        this.insertLottoForm.get('numberTwo').setErrors({invalid: true});
+      } else {
+        this.insertLottoForm.get('numberTwo').setErrors({ invalid: true });
       }
     });
 
@@ -90,8 +91,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberThree = null;
       if (this.checkNumber(value)) {
         this.lotto.numberThree = value;
-      }else {
-        this.insertLottoForm.get('numberThree').setErrors({invalid: true});
+      } else {
+        this.insertLottoForm.get('numberThree').setErrors({ invalid: true });
       }
     });
 
@@ -99,8 +100,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberFour = null;
       if (this.checkNumber(value)) {
         this.lotto.numberFour = value;
-      }else {
-        this.insertLottoForm.get('numberFour').setErrors({invalid: true});
+      } else {
+        this.insertLottoForm.get('numberFour').setErrors({ invalid: true });
       }
     });
 
@@ -108,8 +109,8 @@ export class InsertLottoComponent implements OnInit {
       this.lotto.numberFive = null;
       if (this.checkNumber(value)) {
         this.lotto.numberFive = value;
-      }else {
-        this.insertLottoForm.get('numberFive').setErrors({invalid: true});
+      } else {
+        this.insertLottoForm.get('numberFive').setErrors({ invalid: true });
       }
     });
 
@@ -145,7 +146,7 @@ export class InsertLottoComponent implements OnInit {
 
   insertLotto() {
     this.submitted = true;
-    if  (this.insertLottoForm.valid) {
+    if (this.insertLottoForm.valid) {
       this.mainService.insertLottoNumber(this.lotto).subscribe(result => {
         this.cleanForm();
         this.submitted = false;
@@ -172,6 +173,14 @@ export class InsertLottoComponent implements OnInit {
     this.insertLottoForm.get('numberFour').setValue('');
     this.insertLottoForm.get('numberFive').setValue('');
     this.insertLottoForm.get('specialBall').setValue('');
+  }
+
+  isPowerball() {
+    return isNullOrUndefinedOrEmpty(this.lotto.lottoType) || this.lotto.lottoType.lottoType === 'P';
+  }
+
+  isMegaMillions() {
+    return !isNullOrUndefinedOrEmpty(this.lotto.lottoType) && this.lotto.lottoType.lottoType === 'M';
   }
 
   getNumberOne() {

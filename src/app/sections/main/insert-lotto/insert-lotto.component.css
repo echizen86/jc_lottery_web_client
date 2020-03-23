@@ -4,10 +4,13 @@
   margin-right: 25px;
 }
 
+div .select-lotto-type {
+  align-self: center;
+}
+
 .select-lotto-type {
   width: 150px;
   height: 25px;
-  align-content: flex-end;
 }
 
 .line-balls {
@@ -28,10 +31,20 @@
   padding: 12px;
 }
 
-.dot-special-ball {
-  background-color: coral;
+.dot-power-ball {
+  background-color: #e30c07;
+}
+
+.dot-mega-millions {
+  background-color: #ffdf00;
 }
 
 .button {
-  align-content: center;
+  flex: auto;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
 }

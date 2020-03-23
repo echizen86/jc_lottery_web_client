@@ -1,112 +1,109 @@
-<mat-accordion>
     <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Insert Lotto
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form [formGroup]="insertLottoForm" novalidate>
-            <div>
-                <span>
-                    <mat-form-field>
-                        <mat-label>Choose a date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="date">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                </span>
-                <span>
-                    <select class="select-lotto-type form-control" formControlName="selectedLottoType"
-                    [ngClass]="{'is-invalid': submitted && insertLottoForm.get('selectedLottoType').errors}">
-                        <option></option>
-                        <option *ngFor="let lotto of lottoTypeList" [ngValue]="lotto" [innerText]="lotto.description">
-                        </option>
-                    </select>
-                </span>
+      <div class="error-message" *ngIf="submitted && insertLottoForm.invalid">
+        <span>Invalid Entry</span>
+      </div>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Insert Lotto
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="insertLottoForm" novalidate>
+        <div class="box">
+          <div>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="select-lotto-type">
+            <select class="select-lotto-type form-control" formControlName="selectedLottoType"
+              [ngClass]="{'is-invalid': submitted && insertLottoForm.get('selectedLottoType').errors}">
+              <option></option>
+              <option *ngFor="let lotto of lottoTypeList" [ngValue]="lotto" [innerText]="lotto.description">
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- Inputs -->
+        <div id="contractTaxBox" class="col-md-6 grp-col-3">
+          <div>
+            <span>
+              <input class="number form-control" formControlName="numberOne" maxlength=2
+                [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberOne').errors}"
+                [readOnly]="disabledInputNumber()">
+            </span>
+            <span>
+              <input class="number form-control" formControlName="numberTwo" maxlength=2
+                [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberTwo').errors}"
+                [readonly]="disabledInputNumber()">
+            </span>
+            <span>
+              <input class="number form-control" formControlName="numberThree" maxlength=2
+                [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberThree').errors}"
+                [readonly]="disabledInputNumber()">
+            </span>
+            <span>
+              <input class="number form-control" formControlName="numberFour" maxlength=2
+                [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFour').errors}"
+                [readonly]="disabledInputNumber()">
+            </span>
+            <span>
+              <input class="number form-control" formControlName="numberFive" maxlength=2
+                [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFive').errors}"
+                [readonly]="disabledInputNumber()">
+            </span>
+            <span>
+              <input class="number form-control" formControlName="specialBall" maxlength=2
+                [ngClass]="{'is-invalid': submitted && insertLottoForm.get('specialBall').errors}"
+                [readonly]="disabledInputNumber()">
+            </span>
+          </div>
+        </div>
+        <!-- Balls -->
+        <div class="line-balls">
+          <span class="dot">
+            <div class="dot-number">
+              <span [innerText]="getNumberOne()"></span>
             </div>
-            <!-- Inputs -->
-            <div id="contractTaxBox" class="col-md-6 grp-col-3">
-                <div>
-                    <span>                    
-                        <input type="number" class="number form-control" formControlName="numberOne" maxlength=2
-                            [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberOne').errors}"
-                            [readonly]="disabledInputNumber()">
-                        
-                    </span>
-                    <span>
-                        <input type="number" class="number form-control" formControlName="numberTwo" maxlength=2
-                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberTwo').errors}"
-                        [readonly]="disabledInputNumber()">
-                    </span>
-                    <span>
-                        <input type="number" class="number form-control" formControlName="numberThree" maxlength=2
-                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberThree').errors}"
-                        [readonly]="disabledInputNumber()">
-                    </span>
-                    <span>
-                        <input type="number" class="number form-control" formControlName="numberFour" maxlength=2
-                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFour').errors}"
-                        [readonly]="disabledInputNumber()">
-                    </span>
-                    <span>
-                        <input type="number" class="number form-control" formControlName="numberFive" maxlength=2
-                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('numberFive').errors}"
-                        [readonly]="disabledInputNumber()">
-                    </span>
-                    <span>
-                        <input type="number" class="number form-control" formControlName="specialBall" maxlength=2
-                        [ngClass]="{'is-invalid': submitted && insertLottoForm.get('specialBall').errors}">
-                    </span>
-                </div>
-
-                <!-- errors -->
-                <div>
-                    <span *ngIf="insertLottoForm.get('numberOne').errors?.invalid">I/N</span>
-                    <span *ngIf="insertLottoForm.get('numberTwo').errors?.invalid">I/N</span>
-                    <span *ngIf="insertLottoForm.get('numberThree').errors?.invalid">I/N</span>
-                    <span *ngIf="insertLottoForm.get('numberFour').errors?.invalid">I/N</span>
-                    <span *ngIf="insertLottoForm.get('numberFive').errors?.invalid">I/N</span>
-                
-                </div>
+          </span>
+          <span class="dot">
+            <div class="dot-number">
+              <span [innerText]="getNumberTwo()"></span>
             </div>
-            <!-- Balls -->
-            <div class="line-balls">
-                <span class="dot">
-                    <div class="dot-number">
-                        <span [innerText]="getNumberOne()"></span>
-                    </div>
-                </span>
-                <span class="dot">
-                    <div class="dot-number">
-                        <span [innerText]="getNumberTwo()"></span>
-                    </div>
-                </span>
-                <span class="dot">
-                    <div class="dot-number">
-                        <span [innerText]="getNumberThree()"></span>
-                    </div>
-                </span>
-                <span class="dot">
-                    <div class="dot-number">
-                        <span [innerText]="getNumberFour()"></span>
-                    </div>
-                </span>
-                <span class="dot">
-                    <div class="dot-number">
-                        <span [innerText]="getNumberFive()"></span>
-                    </div>
-                </span>
-                <span class="dot dot-special-ball">
-                    <div class="dot-number">
-                        <span [innerText]="getSpecialBall()"></span>
-                    </div>
-                </span>
+          </span>
+          <span class="dot">
+            <div class="dot-number">
+              <span [innerText]="getNumberThree()"></span>
             </div>
-            <div class="button">
-                <button (click)="insertLotto()">
-                    Insert
-                </button>
+          </span>
+          <span class="dot">
+            <div class="dot-number">
+              <span [innerText]="getNumberFour()"></span>
             </div>
-        </form>
+          </span>
+          <span class="dot">
+            <div class="dot-number">
+              <span [innerText]="getNumberFive()"></span>
+            </div>
+          </span>
+          <span class="dot dot-power-ball" *ngIf="isPowerball()">
+            <div class="dot-number">
+              <span [innerText]="getSpecialBall()"></span>
+            </div>
+          </span>
+          <span class="dot dot-mega-millions" *ngIf="isMegaMillions()">
+            <div class="dot-number">
+              <span [innerText]="getSpecialBall()"></span>
+            </div>
+          </span>
+        </div>
+        <div class="box">
+          <button mat-button (click)="insertLotto()" class="button">
+            Insert
+          </button>
+        </div>
+      </form>
     </mat-expansion-panel>
-</mat-accordion>
+

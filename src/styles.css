@@ -319,3 +319,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .form-control.is-invalid {
   border-color: #da5757 !important;
 }
+
+.error-message {
+  background-color: #FA856C;
+  padding: 5px !important;
+}
+

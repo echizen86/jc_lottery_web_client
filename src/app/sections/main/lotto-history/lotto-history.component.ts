@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LottoType } from '../data-type/lotto-type';
-import { ContainerComponent } from '../container/container.component'
 import { Lotto } from '../data-type/lotto';
 import { MainService } from '../main.service';
 
@@ -18,8 +17,7 @@ export class LottoHistoryComponent implements OnInit {
   powerBallNumbers: Lotto[]; // all lotto
   numberList: number[];
   specialBallList: number[];
-  picker='';
-  
+
 
   constructor(private mainService: MainService) { }
 
@@ -54,8 +52,7 @@ export class LottoHistoryComponent implements OnInit {
     }
   }
 
-  search() { 
-    console.log(this.picker);
+  search() {
     return false;
   }
 
