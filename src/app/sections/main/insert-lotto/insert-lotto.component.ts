@@ -4,7 +4,6 @@ import { LottoType } from '../data-type/lotto-type';
 import { Lotto } from '../data-type/lotto';
 import { isNullOrUndefinedOrEmpty } from 'src/app/shared/services/utils.service';
 import { MainService } from '../main.service';
-import { isNullOrUndefined } from 'util';
 
 
 @Component({
@@ -55,7 +54,6 @@ export class InsertLottoComponent implements OnInit {
     });
 
     this.insertLottoForm.get('selectedLottoType').valueChanges.subscribe(value => {
-      console.log(value);
       this.lotto.lottoType = value;
       if (this.disabledInputNumber()) {
         this.cleanInputNumbers();
@@ -143,7 +141,6 @@ export class InsertLottoComponent implements OnInit {
       this.mainService.insertLottoNumber(this.lotto).subscribe(result => {
         this.cleanForm();
         this.submitted = false;
-        // handle an event to update the lotto numbers list in parent
       });
     }
   }

@@ -1,4 +1,7 @@
 <mat-expansion-panel>
+  <div class="error-message" *ngIf="submitted && lottoHistoryForm.invalid">
+    <span>Invalid Entry</span>
+  </div>
   <mat-expansion-panel-header>
     <mat-panel-title>
       Lotto History
@@ -7,38 +10,38 @@
   <form [formGroup]="lottoHistoryForm" novalidate>
     <div>
       <div class="box">
-        <span>
+        <div>
           <mat-form-field>
             <mat-label>Choose a date</mat-label>
             <input matInput [matDatepicker]="from" formControlName="dateFrom">
             <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
             <mat-datepicker #from></mat-datepicker>
           </mat-form-field>
-        </span>
-        <span>
+        </div>
+        <div>
           <mat-form-field>
             <mat-label>Choose a date</mat-label>
             <input matInput [matDatepicker]="to" formControlName="dateTo">
             <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
             <mat-datepicker #to></mat-datepicker>
           </mat-form-field>
-        </span>
-        <span>
+        </div>
+        <div class="select-lotto-type">
           <select class="select-lotto-type form-control" formControlName="selectedLottoType"
-            [ngClass]="{'is-invalid': submitted}">
+            [ngClass]="{'is-invalid': submitted && lottoHistoryForm.get('selectedLottoType').errors}">
             <option></option>
             <option *ngFor="let lotto of lottoTypeList" [ngValue]="lotto" [innerText]="lotto.description">
             </option>
           </select>
-        </span>
+        </div>
       </div>
-      <div class="button">
-        <button (click)="search()">
+      <div class="box">
+        <button mat-button (click)="search()" class="button">
           Search
         </button>
       </div>
 
-      <div *ngFor="let lotto of powerBallNumbers">
+      <div *ngFor="let lotto of lottoNumbers">
         <span>{{lotto.lottoType.description + ": "}}</span>
         <span>{{lotto.date | DatePipe:'MM/DD/YYYY' + " ::: "}}</span>
         <span>{{lotto.numberOne + " - "}}</span>

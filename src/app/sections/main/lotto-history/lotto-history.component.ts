@@ -15,36 +15,48 @@ export class LottoHistoryComponent implements OnInit {
 
   lottoHistoryForm: FormGroup;
   submitted: boolean;
-  powerBallNumbers: Lotto[]; // all lotto
+  lottoNumbers: Lotto[]; // all lotto
   numberList: number[];
   specialBallList: number[];
+  dateFrom: Date;
+  dateTo: Date;
+  lottoType: LottoType;
 
   constructor(private mainService: MainService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initializeData();
-    this.initializeLottoNumbers();
     this.buildLottoHistoryForm();
+    this.subscribeLottoHistoryForm();
   }
 
   initializeData() {
+    this.submitted = false;
     this.numberList = [];
-    this.powerBallNumbers = [];
-    this.powerBallNumbers = [];
-  }
-
-  initializeLottoNumbers() {
-    this.mainService.getLottoNumbers('P').subscribe(response => {
-      this.powerBallNumbers = response;
-      this.convertLottoToNumberList(this.powerBallNumbers);
-    });
+    this.lottoNumbers = [];
+    this.dateFrom = null;
+    this.dateTo = null;
   }
 
   buildLottoHistoryForm() {
     this.lottoHistoryForm = this.formBuilder.group({
-      dateFrom: new FormControl('', [Validators.required]),
-      dateTo: new FormControl('', [Validators.required]),
+      dateFrom: new FormControl(''),
+      dateTo: new FormControl(''),
       selectedLottoType: new FormControl('', [Validators.required])
+    });
+  }
+
+  subscribeLottoHistoryForm() {
+    this.lottoHistoryForm.get('dateFrom').valueChanges.subscribe(value => {
+      this.dateFrom = value;
+    });
+
+    this.lottoHistoryForm.get('dateTo').valueChanges.subscribe(value => {
+      this.dateTo = value;
+    });
+
+    this.lottoHistoryForm.get('selectedLottoType').valueChanges.subscribe(value => {
+      this.lottoType = value;
     });
   }
 
@@ -61,6 +73,13 @@ export class LottoHistoryComponent implements OnInit {
   }
 
   search() {
+    this.submitted = true;
+    if (this.lottoHistoryForm.valid) {
+      this.mainService.getLottoNumbers(this.lottoType.lottoType).subscribe(result => {
+        console.log(result);
+        this.lottoNumbers = result;
+      });
+    }
     return false;
   }
 
